@@ -26,3 +26,55 @@
         .matt-focus { padding: 60px 0 100px; text-align: center; border-top: 1px solid var(--border); }
         .matt-focus h2 { font-size: 2.2rem; color: #fff; margin-bottom: 30px; letter-spacing: -1px; }
         .matt-focus .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; text-align: left; border-radius: 8px; }
+        .card h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { color: #999; font-size: 1.1rem; }
+
+        /* Footer */
+        footer { padding: 50px 0; text-align: center; border-top: 1px solid var(--border); color: #555; font-size: 0.9rem; font-family: -apple-system, sans-serif; }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        /* Animations */
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .hero, .matt-focus { animation: scaleIn 1s ease forwards; }
+
+        /* Responsive */
+        @media (max-width: 768px) { .hero h1 { font-size: 2.8rem; } .hero p { font-size: 1.2rem; } .market-focus .card-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FOLLOW MATT | INDIA HUB</div>
+        </header>
+        
+        <section class="hero">
+            <div class="badge">Dedicated India Growth Pathway</div>
+            <h1>Capitalize Your Ambition with Matt's Leverage</h1>
+            <p>"We apply international growth logic to create massive leverages. Connect with me, and together, we will move your capital towards wealth freedom."</p>
+            <a href="#" class="cta-btn">Unlock Matt's Strategy</a>
+        </section>
+
+        <section class="matt-focus">
+            <h2>The Leverages Principle for India</h2>
+            <p>We leverage data, AI, and global market positioning to build your personal wealth infrastructure.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Capital Multiplication</h3>
+                    <p>Optimizing your growth trajectory through automated logic specifically tuned for Indian market Dynamics.</p>
+                </div>
+                <div class="card">
+                    <h3>Wealth Freedom Pathway</h3>
+                    <p>Creating systematic, scalable pathways to achieve your ultimate goal of long-term freedom.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            &copy; 2026 Matt Leverages. All Rights Reserved. <br>
+            A Division of OLS Integrated Marketing <br>
+            Operated by Matt Leverages in Taipei and Bengaluru.
+        </footer>
+    </div>
+</body>
+</html>
