@@ -3,79 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLS Integrated Marketing | AI-Driven Growth</title>
+    <title>MattLeverages | OLS Integrated Marketing</title>
     <style>
-        :root { --bg: #0a0a0c; --text: #eaeaea; --primary: #0070f3; --accent: #00dfd8; --card-bg: #161618; --border: #222; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; margin: 0; background-color: var(--bg-color); color: var(--primary-color); }
+        nav { background: #fff; padding: 15px 10%; display: flex; justify-content: space-between; align-items: center; sticky: top; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: var(--primary-color); }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--primary-color); font-weight: 500; font-size: 0.9rem; }
         
-        /* Header */
-        header { padding: 30px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero { padding: 100px 10%; text-align: center; background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); color: white; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto 30px; }
         
-        /* Hero Section */
-        .hero { padding: 120px 0 80px; text-align: center; background: radial-gradient(circle at center, #111 0%, var(--bg) 70%); }
-        .hero h1 { font-size: 4.5rem; font-weight: 900; letter-spacing: -3px; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(180deg, #fff 0%, #aaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.5rem; color: #888; max-width: 700px; margin: 0 auto 40px; }
-        .badge { display: inline-block; padding: 6px 12px; background-color: rgba(0, 112, 243, 0.1); border: 1px solid rgba(0, 112, 243, 0.3); color: var(--primary); border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-
-        /* Features Section */
-        .features { padding: 80px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .feature-card { background-color: var(--card-bg); border: 1px solid var(--border); padding: 40px; border-radius: 12px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .feature-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,112,243,0.1); }
-        .feature-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transform: scaleX(0); transition: transform 0.3s ease; }
-        .feature-card:hover::after { transform: scaleX(1); }
-        .feature-card h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 15px; color: #fff; }
-        .feature-card p { color: #888; font-size: 1.1rem; }
-
-        /* Footer */
-        footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); color: #666; font-size: 0.9rem; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
-        footer a:hover { text-decoration: underline; }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hero h1, .hero p, .feature-card { animation: fadeIn 0.8s ease forwards; opacity: 0; }
-        .hero p { animation-delay: 0.2s; }
-        .feature-card:nth-child(1) { animation-delay: 0.4s; }
-        .feature-card:nth-child(2) { animation-delay: 0.5s; }
-        .feature-card:nth-child(3) { animation-delay: 0.6s; }
-
-        /* Responsive */
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .hero p { font-size: 1.2rem; } }
+        .section { padding: 60px 10%; max-width: 1000px; margin: auto; }
+        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+        .social-card { background: white; padding: 25px; border-radius: 12px; text-align: center; text-decoration: none; color: var(--primary-color); transition: transform 0.3s; border: 1px solid #eee; }
+        .social-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        
+        .contact-box { background: #fff; padding: 40px; border-radius: 20px; text-align: center; margin-top: 40px; border: 2px dashed var(--accent-color); }
+        .btn-line { background: #06C755; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
+        
+        .policy-content { font-size: 0.9rem; color: #666; background: #fff; padding: 30px; border-radius: 10px; margin-top: 40px; }
+        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #888; }
+        hr { border: 0; border-top: 1px dashed #ccc; margin: 40px 0; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">OLS / MATT LEVERAGES</div>
-        </header>
-        
-        <section class="hero">
-            <div class="badge">AI-Powered Infrastructure</div>
-            <h1>OLS 整合行銷</h1>
-            <p>我們不只是行銷代理，我們是您的系統槓桿。利用 AI 自動化技術，為企業打造無法被複製的爆發性增長優勢。</p>
-        </section>
 
-        <section class="features">
-            <div class="feature-card">
-                <h2>AI 自動化投放</h2>
-                <p>將複雜的流量購買流程自動化，精準捕捉高 CVR 用戶，實現 ROI 的最大化。</p>
-            </div>
-            <div class="feature-card">
-                <h2>跨境UA策略</h2>
-                <p>憑藉深厚的 Senior UA 背景，為您打通國際市場（如印度），建立穩固的流量池。</p>
-            </div>
-            <div class="feature-card">
-                <h2>數據系統建構</h2>
-                <p>不僅僅是報告，我們為您搭建端到端的數據監測系統，讓每一次決策都有數據背書。</p>
-            </div>
-        </section>
-        
-        <footer>
-            &copy; 2026 OLS Integrated Marketing. A Division of <a href="/">MattLeverages</a>. All Rights Reserved.
-        </footer>
+<nav>
+    <div class="logo">MattLeverages.</div>
+    <div class="nav-links">
+        <a href="#about">關於我們</a>
+        <a href="#social">社群媒體</a>
+        <a href="#contact">聯繫資訊</a>
+        <a href="#privacy">隱私政策</a>
     </div>
-</body>
-</html>
+</nav>
+
+<section class="hero">
+    <h1>Matt Leverages.</h1>
+    <p>透過 AI 自動化與數據驅動的整合行銷，為企業在競爭激烈的市場中創造不公平的競爭優勢。</p>
+</section>
+
+<section id="about" class="section">
+    <h2>OLS 整合行銷 (OLS Integrated Marketing)</h2>
+    <p>我們專注於跨平台的用戶增長 (User Acquisition) 與自動化工作流建置。不論是 Facebook、Instagram 還是 TikTok，我們都能協助您建立穩定的增長系統。</p>
+</section>
+
+<section id="social" class="section">
+    <h2>社群媒體平台</h2>
+    <div class="social-grid">
+        <a href="https://www.facebook.com/profile.php?id=61588269400777" class="social-card
