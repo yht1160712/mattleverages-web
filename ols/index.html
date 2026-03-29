@@ -3,135 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLS 整合行銷 | 24H 廣告招客系統</title>
+    <title>OLS Integrated Marketing | 一號線創意工作室</title>
     <style>
-        :root {
-            --dark-bg: #05070a;
-            --card-bg: rgba(255, 255, 255, 0.04);
-            --accent-blue: #0088ff;
-            --gold: #f1c40f;
-            --text-main: #f0f0f0;
-        }
-        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background-color: var(--dark-bg); color: var(--text-main); margin: 0; line-height: 1.5; overflow-x: hidden; }
+        :root { --bg: #0a0a0c; --text: #eaeaea; --primary: #0070f3; --accent: #00dfd8; --card-bg: #161618; --border: #222; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
         
-        /* 導航 */
-        nav { background: rgba(5, 7, 10, 0.9); padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
-        .logo { font-weight: 900; font-size: 1.3rem; color: #fff; letter-spacing: 2px; }
-        .logo span { color: var(--accent-blue); }
-
-        /* Hero 視覺區塊 */
-        .hero { 
-            min-height: 50vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center;
-            background: radial-gradient(circle at center, #0f1c2e 0%, #05070a 100%);
-            padding: 40px 10%;
-        }
-        .hero h1 { font-size: 3rem; margin-bottom: 15px; color: #fff; letter-spacing: -1px; text-shadow: 0 0 20px rgba(0,136,255,0.3); }
-        .hero p { font-size: 1.25rem; color: #bbb; max-width: 800px; line-height: 1.8; }
-        .hero b { color: var(--gold); font-weight: 800; }
-
-        /* 內容容器 */
-        .container { padding: 40px 8%; max-width: 1000px; margin: auto; }
-        .section-title { text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: #fff; position: relative; }
-        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: var(--accent-blue); margin: 10px auto; }
+        header { padding: 30px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* 平台卡片 */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid rgba(255,255,255,0.08); 
-            padding: 25px; 
-            border-radius: 12px; 
-            text-decoration: none; 
-            color: inherit; 
-            transition: all 0.3s ease;
-        }
-        .card:hover { 
-            background: rgba(255, 255, 255, 0.08); 
-            border-color: var(--accent-blue);
-            transform: translateY(-5px);
-        }
-        .card h3 { color: var(--accent-blue); font-size: 1.4rem; margin-top: 0; margin-bottom: 10px; }
-        .card p { font-size: 0.95rem; color: #999; }
-        
-        /* 聯絡區塊 */
-        .cta-box { 
-            background: linear-gradient(145deg, #0a1526 0%, #162a45 100%); 
-            border: 1px solid rgba(0,136,255,0.2);
-            border-radius: 15px; 
-            padding: 40px; 
-            text-align: center; 
-            margin-top: 40px; 
-        }
-        .line-btn { 
-            background: #06C755; 
-            color: white; 
-            padding: 18px 40px; 
-            border-radius: 100px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            display: inline-block; 
-            font-size: 1.3rem;
-            margin-top: 15px;
-            animation: pulse 2s infinite;
-            transition: all 0.3s ease;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.6); }
-            70% { box-shadow: 0 0 0 15px rgba(6, 199, 85, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(6, 199, 85, 0); }
-        }
-        .line-btn:hover { background: #05b34c; transform: scale(1.05); }
+        .hero { padding: 100px 0 60px; text-align: center; background: radial-gradient(circle at center, #111 0%, var(--bg) 70%); }
+        .hero h1 { font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(180deg, #fff 0%, #aaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.3rem; color: #888; max-width: 750px; margin: 0 auto 40px; }
+        .badge { display: inline-block; padding: 6px 12px; background-color: rgba(0, 112, 243, 0.1); border: 1px solid rgba(0, 112, 243, 0.3); color: var(--primary); border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
 
-        footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 0.85rem; }
+        .features { padding: 40px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background-color: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 12px; }
+        .feature-card h2 { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+        .feature-card p { color: #888; }
+
+        /* Verification Info Footer (關鍵：一號線創意工作室) */
+        footer { padding: 80px 0 60px; border-top: 1px solid var(--border); background-color: #0d0d0f; }
+        .footer-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .legal-info { color: #aaa; margin-bottom: 30px; padding: 25px; border: 1px solid #333; border-radius: 8px; display: inline-block; text-align: left; background: #111; line-height: 2; }
+        .legal-info b { color: var(--primary); margin-right: 5px; }
+        .copyright { color: #555; font-size: 0.85rem; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="logo">OLS / MATT LEVERAGES</div>
+        </header>
+        
+        <section class="hero">
+            <div class="badge">AI-Powered Growth Solutions</div>
+            <h1>OLS 整合行銷</h1>
+            <p>由 **一號線創意工作室** 營運。我們致力於將 AI 自動化與 UA 數據深度整合，為企業主與創作者建立高效、可規模化的品牌增長系統。</p>
+        </section>
 
-<nav>
-    <div class="logo">MATT<span>LEVERAGES</span></div>
-</nav>
-
-<section class="hero">
-    <h1>OLS 整合行銷</h1>
-    <p>替您建立起 <b>24H 廣告招客系統</b><br>數據精準鎖定，客源滾滾來，讓 AI 幫您做行銷。</p>
-</section>
-
-<div class="container">
-    <h2 class="section-title">官方媒體通路</h2>
-    <div class="grid">
-        <a href="https://www.facebook.com/profile.php?id=61588269400777" target="_blank" class="card">
-            <h3>Facebook 官方粉專</h3>
-            <p>商務談判、最新數位行銷趨勢與案例分享。</p>
-        </a>
-        <a href="https://www.instagram.com/prompt_and_ads/" target="_blank" class="card">
-            <h3>Instagram 實戰頁面</h3>
-            <p>AI 廣告指令應用與高效視覺設計成果展示。</p>
-        </a>
-        <a href="https://www.tiktok.com/@prompt_and_ads" target="_blank" class="card">
-            <h3>TikTok 增長頻道</h3>
-            <p>最新短影音引流策略，揭秘如何快速獲取精準客源。</p>
-        </a>
+        <section class="features">
+            <div class="feature-card">
+                <h2>AI 自動化行銷</h2>
+                <p>優化創意內容產出與投放路徑，實現流量資產最大化。</p>
+            </div>
+            <div class="feature-card">
+                <h2>跨境 UA 指南</h2>
+                <p>協助品牌深耕印度等全球新興市場，精準獲取高淨值用戶。</p>
+            </div>
+            <div class="feature-card">
+                <h2>數據架構建置</h2>
+                <p>專業監測系統開發，讓每一筆行銷預算都能被數據追蹤與優化。</p>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="legal-info">
+                    <b>營運實體：</b>一號線創意工作室 (Line One Creative Studio)<br>
+                    <b>統一編號：</b>91245779<br>
+                    <b>官方地址：</b>新北市新店區安興路21號13樓
+                </div>
+                <div class="copyright">
+                    &copy; 2026 OLS Integrated Marketing. A Division of <a href="/" style="color:var(--primary); text-decoration:none;">MattLeverages</a>.
+                </div>
+            </div>
+        </footer>
     </div>
-
-    <div class="cta-box">
-        <h2>立即啟動您的招客機器</h2>
-        <p>專業 AI 基礎建設諮詢 | 跨國 UA 增長計畫</p>
-        <p style="font-size: 1.4rem; color: var(--gold); margin: 5px 0;">Line ID: 0933050110</p>
-        <a href="https://line.me/ti/p/~0933050110" target="_blank" class="line-btn">
-            立即加 Line 聊聊
-        </a>
-    </div>
-</div>
-
-<footer>
-    &copy; 2026 MattLeverages. OLS Integrated Marketing. <br>
-    跨國流量專家與 AI 行銷架構師
-</footer>
-
 </body>
 </html>
