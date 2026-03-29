@@ -3,159 +3,956 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLS 整合行銷 | AI 驅動的規模化成長專家</title>
+    <title>OLS 整合行銷 | 讓你的作品自動找到百萬預算屋主</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', "Microsoft JhengHei", sans-serif; }
-        .gradient-blue { background: linear-gradient(135deg, #003366 0%, #0055aa 100%); }
-        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        :root {
+            --p1: #0d0628;       /* deep space navy */
+            --p2: #1a0550;       /* dark violet */
+            --p3: #3b0f8c;       /* core purple */
+            --p4: #6d28d9;       /* vivid violet */
+            --p5: #a855f7;       /* medium purple */
+            --p6: #c084fc;       /* light purple */
+            --b1: #1e3a8a;       /* deep blue */
+            --b2: #2563eb;       /* electric blue */
+            --b3: #60a5fa;       /* sky blue */
+            --gold: #c9a84c;     /* brand gold */
+            --gold-lt: #f0d080;  /* light gold */
+            --surface: #f5f0ff;  /* soft purple tint */
+            --text: #0d0628;
+            --muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', "Microsoft JhengHei", sans-serif;
+            background: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .font-display { font-family: 'Syne', "Microsoft JhengHei", sans-serif; }
+        h1, h2, h3 { font-family: 'Syne', "Microsoft JhengHei", sans-serif; }
+
+        /* ─── NAV ─── */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(13,6,40,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(168,85,247,0.2);
+        }
+        .nav-inner {
+            max-width: 1280px; margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; color:#fff; }
+        .logo span { color: var(--p5); }
+        .nav-links { display:flex; align-items:center; gap:24px; }
+        .nav-links a { color:rgba(255,255,255,0.7); font-size:0.875rem; font-weight:500; text-decoration:none; transition:color 0.2s; }
+        .nav-links a:hover { color:#fff; }
+        .nav-icon { color:rgba(255,255,255,0.5); transition:color 0.2s; }
+        .nav-icon:hover { color: var(--p5); }
+        .btn-nav {
+            background: linear-gradient(135deg, var(--p4), var(--b2));
+            color: #fff; padding: 8px 20px; border-radius: 8px;
+            font-size: 0.875rem; font-weight: 700; text-decoration: none;
+            transition: all 0.25s;
+        }
+        .btn-nav:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(109,40,217,0.4); }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative; overflow: hidden;
+            background: var(--p1);
+            min-height: 100vh;
+            display: flex; align-items: center;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(109,40,217,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(37,99,235,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 40% 40% at 90% 10%, rgba(168,85,247,0.2) 0%, transparent 50%);
+        }
+        .hero-stars {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+                radial-gradient(1px 1px at 55% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 75% 5%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(1px 1px at 50% 90%, rgba(255,255,255,0.3) 0%, transparent 100%);
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(109,40,217,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(109,40,217,0.06) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+        .hero-content { position:relative; z-index:10; max-width:1280px; margin:0 auto; padding:80px 24px; }
+        .tag-pill {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:5px 16px;
+            background: rgba(168,85,247,0.15);
+            border: 1px solid rgba(168,85,247,0.35);
+            border-radius: 100px;
+            font-size: 13px; color: var(--p6); font-weight:500;
+            margin-bottom: 24px;
+        }
+        .tag-pill::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--p5); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight:800; color:#fff; line-height:1.1; margin-bottom:24px; }
+        .hero h1 em { font-style:normal; color: var(--p5); }
+        .hero h1 strong { color: var(--gold-lt); }
+        .hero-sub { font-size:1.1rem; color:rgba(255,255,255,0.65); max-width:600px; line-height:1.7; margin-bottom:40px; }
+        .hero-sub b { color:#fff; }
+
+        .hero-ctas { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--p4) 0%, var(--b2) 100%);
+            color: #fff; padding: 14px 32px; border-radius:12px;
+            font-weight:700; font-size:1rem; text-decoration:none;
+            transition: all 0.25s; display:inline-block;
+            box-shadow: 0 4px 20px rgba(109,40,217,0.4);
+        }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow: 0 8px 32px rgba(109,40,217,0.5); }
+        .btn-ghost {
+            border: 1.5px solid rgba(255,255,255,0.2); color:#fff;
+            padding:14px 32px; border-radius:12px; font-weight:600; font-size:1rem;
+            text-decoration:none; transition: all 0.25s; display:inline-block;
+        }
+        .btn-ghost:hover { border-color: var(--p5); color: var(--p5); }
+
+        .social-row { display:flex; flex-wrap:wrap; gap:10px; }
+        .social-btn {
+            display:flex; align-items:center; gap:7px;
+            padding:9px 16px; border-radius:9px;
+            border: 1px solid rgba(255,255,255,0.12);
+            color:rgba(255,255,255,0.7); font-size:0.8rem; font-weight:500;
+            text-decoration:none; transition: all 0.2s;
+        }
+        .social-btn:hover { border-color: var(--p5); color:var(--p5); background:rgba(168,85,247,0.08); }
+        .social-btn svg { width:16px; height:16px; flex-shrink:0; }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            background: linear-gradient(135deg, var(--p2) 0%, var(--b1) 100%);
+            border-top: 1px solid rgba(168,85,247,0.2);
+            border-bottom: 1px solid rgba(168,85,247,0.2);
+            padding: 48px 24px;
+        }
+        .stats-inner { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; }
+        .stat-val {
+            font-family:'Syne',sans-serif; font-weight:800; font-size:2.6rem;
+            background: linear-gradient(135deg, #fff 0%, var(--p6) 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+            display:block; margin-bottom:4px;
+        }
+        .stat-lbl { color:rgba(255,255,255,0.5); font-size:0.8rem; line-height:1.4; }
+
+        /* ─── SECTION COMMONS ─── */
+        .section-label {
+            display:inline-block; padding:4px 14px;
+            background:var(--surface); border:1px solid rgba(109,40,217,0.2); border-radius:100px;
+            font-size:12px; color:var(--p4); font-weight:700; letter-spacing:0.05em;
+            margin-bottom:16px; text-transform:uppercase;
+        }
+        .section-title { font-size: clamp(1.75rem,3.5vw,2.5rem); font-weight:800; color:var(--p1); line-height:1.2; }
+        .section-sub { color:var(--muted); margin-top:12px; max-width:560px; line-height:1.6; }
+        .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(109,40,217,0.12),transparent); }
+
+        /* ─── PAIN POINTS ─── */
+        .pain-section { background: #fff; padding:96px 24px; }
+        .pain-inner { max-width:1280px; margin:0 auto; }
+        .pain-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+        .pain-card {
+            border:1px solid rgba(109,40,217,0.12); border-radius:20px; padding:32px;
+            position:relative; overflow:hidden; transition: all 0.3s;
+        }
+        .pain-card::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(90deg, var(--p4), var(--b2));
+            opacity:0; transition:opacity 0.3s;
+        }
+        .pain-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(109,40,217,0.1); border-color:rgba(109,40,217,0.25); }
+        .pain-card:hover::before { opacity:1; }
+        .pain-num {
+            font-family:'Syne',sans-serif; font-size:3rem; font-weight:800;
+            color: rgba(109,40,217,0.08); position:absolute; top:16px; right:20px; line-height:1;
+        }
+        .pain-icon { font-size:2rem; margin-bottom:16px; }
+        .pain-title { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; color:var(--p1); margin-bottom:12px; }
+        .pain-desc { color:var(--muted); font-size:0.875rem; line-height:1.7; }
+
+        .pain-cta-bar {
+            margin-top:32px; padding:20px 28px; border-radius:16px;
+            background: linear-gradient(135deg, var(--p1) 0%, var(--b1) 100%);
+            color:#fff; font-size:0.95rem; font-weight:600; text-align:center;
+            border-left: 4px solid var(--gold);
+        }
+        .pain-cta-bar span { color: var(--gold-lt); }
+
+        /* ─── FORMULA ─── */
+        .formula-section { background:var(--surface); padding:96px 24px; }
+        .formula-inner { max-width:1280px; margin:0 auto; }
+        .formula-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
+        .formula-card {
+            background:#fff; border-radius:18px; padding:28px;
+            border:1px solid rgba(109,40,217,0.1);
+            transition: all 0.3s; position:relative;
+        }
+        .formula-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(109,40,217,0.12); }
+        .formula-badge {
+            display:inline-block; padding:3px 10px; border-radius:6px;
+            font-size:11px; font-weight:700; margin-bottom:16px;
+            background: linear-gradient(135deg, var(--p4), var(--b2));
+            color:#fff;
+        }
+        .formula-num { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; color:var(--p4); margin-bottom:8px; }
+        .formula-title { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:var(--p1); margin-bottom:10px; }
+        .formula-bullets { list-style:none; }
+        .formula-bullets li { font-size:0.82rem; color:var(--muted); padding:4px 0; display:flex; gap:8px; align-items:flex-start; }
+        .formula-bullets li::before { content:'→'; color:var(--p4); font-weight:700; flex-shrink:0; margin-top:1px; }
+        .formula-card-lg { grid-column: span 3; }
+        .formula-card-lg .formula-inner-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+
+        /* ─── FUNNEL ─── */
+        .funnel-section { background:#fff; padding:96px 24px; }
+        .funnel-inner { max-width:1280px; margin:0 auto; }
+        .funnel-steps { display:flex; flex-direction:column; gap:0; margin-top:48px; max-width:760px; margin-left:auto; margin-right:auto; }
+        .funnel-step {
+            display:flex; gap:20px; align-items:flex-start;
+            padding:24px 28px; background:#fff;
+            border:1px solid rgba(109,40,217,0.1); border-radius:16px;
+            margin-bottom:4px; position:relative; transition:all 0.25s;
+        }
+        .funnel-step:hover { border-color:rgba(109,40,217,0.3); box-shadow:0 4px 20px rgba(109,40,217,0.08); }
+        .funnel-step-num {
+            width:40px; height:40px; border-radius:10px; flex-shrink:0;
+            background: linear-gradient(135deg, var(--p4), var(--b2));
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Syne',sans-serif; font-weight:800; color:#fff; font-size:1rem;
+        }
+        .funnel-step-arrow {
+            text-align:center; font-size:1.25rem; color:var(--p4); padding:8px 0;
+            margin-bottom:4px;
+        }
+        .funnel-step-content h4 { font-family:'Syne',sans-serif; font-weight:700; color:var(--p1); margin-bottom:4px; }
+        .funnel-step-content p { font-size:0.85rem; color:var(--muted); line-height:1.6; }
+        .funnel-cta {
+            margin-top:32px; text-align:center;
+            padding:28px; border-radius:20px;
+            background: linear-gradient(135deg, var(--p1) 0%, var(--p3) 50%, var(--b1) 100%);
+            color:#fff;
+        }
+        .funnel-cta h3 { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--gold-lt); margin-bottom:8px; }
+        .funnel-cta p { color:rgba(255,255,255,0.7); font-size:0.875rem; }
+
+        /* ─── SERVICES ─── */
+        .services-section { background:var(--surface); padding:96px 24px; }
+        .services-inner { max-width:1280px; margin:0 auto; }
+        .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:48px; }
+        .service-card {
+            background:#fff; padding:32px; border-radius:20px;
+            border:1px solid rgba(109,40,217,0.1); transition:all 0.3s;
+            position:relative; overflow:hidden;
+        }
+        .service-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(109,40,217,0.12); border-color:rgba(109,40,217,0.25); }
+        .service-num-badge {
+            width:44px; height:44px; border-radius:10px; margin-bottom:20px;
+            background: linear-gradient(135deg, rgba(109,40,217,0.1), rgba(37,99,235,0.1));
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Syne',sans-serif; font-weight:800; color:var(--p4); font-size:1rem;
+        }
+        .service-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--p1); margin-bottom:10px; }
+        .service-desc { font-size:0.83rem; color:var(--muted); line-height:1.65; }
+
+        /* ─── DATA CHARTS ─── */
+        .data-section { background:#fff; padding:96px 24px; }
+        .data-inner { max-width:1280px; margin:0 auto; }
+        .chart-card {
+            background:#fff; border:1px solid rgba(109,40,217,0.1);
+            border-radius:20px; padding:28px;
+        }
+        .chart-header h3 { font-family:'Syne',sans-serif; font-weight:700; color:var(--p1); }
+        .chart-header p { color:var(--muted); font-size:0.8rem; margin-top:4px; }
+        .badge { display:inline-block; padding:3px 10px; border-radius:100px; font-size:11px; font-weight:700; }
+        .badge-green { background:#dcfce7; color:#16a34a; }
+        .badge-blue  { background:#dbeafe; color:#1d4ed8; }
+        .badge-purple{ background:#f3e8ff; color:#7e22ce; }
+
+        .metric-box { background:var(--surface); border-radius:14px; padding:20px; text-align:center; }
+        .metric-val { font-family:'Syne',sans-serif; font-weight:800; font-size:1.9rem; color:var(--p4); }
+        .metric-val.green { color:#16a34a; }
+        .metric-val.gold  { color: var(--gold); }
+        .metric-lbl { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+
+        /* ─── CASE STUDY: RENOVATION ─── */
+        .reno-section { background:var(--surface); padding:96px 24px; }
+        .reno-inner { max-width:1280px; margin:0 auto; }
+
+        .data-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+        .data-table th { background:var(--surface); color:var(--p4); padding:10px 14px; text-align:left; font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; }
+        .data-table td { padding:10px 14px; border-bottom:1px solid rgba(109,40,217,0.06); }
+        .data-table tr:hover td { background:#fafaff; }
+        .tc-green { background:#dcfce7; color:#16a34a; font-weight:700; border-radius:4px; padding:2px 7px; }
+        .tc-purple{ background:#f3e8ff; color:#7e22ce; font-weight:700; border-radius:4px; padding:2px 7px; }
+        .tc-gold  { background:#fef3c7; color:#92400e; font-weight:700; border-radius:4px; padding:2px 7px; }
+
+        /* ─── ABOUT ─── */
+        .about-section {
+            background: linear-gradient(135deg, var(--p1) 0%, var(--p2) 50%, var(--b1) 100%);
+            padding:96px 24px; position:relative; overflow:hidden;
+        }
+        .about-section::before {
+            content:'';position:absolute;top:-200px;right:-200px;
+            width:600px;height:600px;
+            background:radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 65%);
+            pointer-events:none;
+        }
+        .about-inner { max-width:800px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+        .about-inner h2 { color:#fff; }
+        .about-text { color:rgba(255,255,255,0.65); line-height:1.8; margin-top:20px; font-size:1rem; }
+        .about-text b { color:#fff; }
+        .cert-tags { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:28px; }
+        .cert-tag {
+            padding:6px 16px; border-radius:100px; font-size:0.8rem; font-weight:600;
+            background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.6);
+            border:1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ─── FOOTER ─── */
+        footer { background:#060112; padding:80px 24px 40px; }
+        .footer-inner { max-width:1280px; margin:0 auto; text-align:center; }
+        .footer-cta h2 { font-family:'Syne',sans-serif; font-size:clamp(1.5rem,3vw,2.25rem); font-weight:800; color:#fff; margin-bottom:12px; }
+        .footer-cta h2 em { font-style:normal; color:var(--p5); }
+        .footer-cta p { color:rgba(255,255,255,0.5); margin-bottom:36px; }
+        .btn-footer {
+            display:inline-flex; align-items:center; gap:10px;
+            background:#fff; color:var(--p1);
+            padding:18px 40px; border-radius:16px;
+            font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem;
+            text-decoration:none; transition:all 0.25s;
+            box-shadow:0 8px 32px rgba(109,40,217,0.25);
+        }
+        .btn-footer:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(109,40,217,0.35); }
+        .footer-bottom {
+            margin-top:60px; padding-top:28px;
+            border-top:1px solid rgba(255,255,255,0.06);
+            display:flex; justify-content:space-between; align-items:center;
+            flex-wrap:wrap; gap:16px;
+        }
+        .footer-bottom p { color:rgba(255,255,255,0.25); font-size:0.8rem; }
+        .footer-icons { display:flex; gap:16px; }
+        .footer-icon { color:rgba(255,255,255,0.3); transition:color 0.2s; }
+        .footer-icon:hover { color:var(--p5); }
+
+        @media (max-width:768px) {
+            .pain-grid, .formula-grid, .services-grid { grid-template-columns:1fr; }
+            .stats-inner { grid-template-columns:repeat(2,1fr); }
+            .nav-links { display:none; }
+            .formula-card-lg .formula-inner-grid { grid-template-columns:1fr; }
+        }
+        @media (max-width:900px) {
+            .services-grid { grid-template-columns:repeat(2,1fr); }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="text-2xl font-bold text-blue-900">OLS <span class="text-blue-600">整合行銷</span></div>
-                <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#services" class="hover:text-blue-600">專利技術</a>
-                    <a href="#cases" class="hover:text-blue-600">成功案例</a>
-                    <a href="#about" class="hover:text-blue-600">關於我們</a>
-                    <a href="https://line.me/ti/p/~0933050110" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">立即諮詢</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <section class="relative py-20 overflow-hidden bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6">
-                    具備強烈創意直覺的 <br><span class="text-blue-600">AI 驅動成長體系</span>
-                </h1>
-                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10">
-                    整合專利自動化技術與下漏斗數據洞察，協助品牌跨越全球 7 大市場，達成可擴展的規模化獲客。
-                </p>
-                <div class="flex justify-center gap-4">
-                    <a href="https://line.me/ti/p/~0933050110" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:shadow-lg transition">開始成長計畫</a>
-                    <a href="#cases" class="px-8 py-4 bg-slate-100 text-slate-700 rounded-xl font-bold text-lg hover:bg-slate-200 transition">查看產業實績</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 gradient-blue text-white">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div class="text-4xl font-bold mb-2">-47%</div>
-                <div class="text-blue-100 text-sm">平均 CPA 降幅</div>
-            </div>
-            <div>
-                <div class="text-4xl font-bold mb-2">+141%</div>
-                <div class="text-blue-100 text-sm">廣告購買量成長</div>
-            </div>
-            <div>
-                <div class="text-4xl font-bold mb-2">7+</div>
-                <div class="text-blue-100 text-sm">跨國市場營運經驗</div>
-            </div>
-            <div>
-                <div class="text-4xl font-bold mb-2">2.5X</div>
-                <div class="text-blue-100 text-sm">素材產製效能提升提升</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900">核心專利：Project One-Tap 自動化引擎</h2>
-                <p class="mt-4 text-slate-600">打破人工限制，建立 24/7 全自動化的創意與投放循環</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 font-bold">01</div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900">Slideshow Pro</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">AI 自動產製動態素材，將設計排期從天縮短至分鐘級，CVR 提升顯著。</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 font-bold">02</div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900">BriefGo</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">結構化需求轉譯系統，確保策略在自動化流程中 100% 準確執行。</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 font-bold">03</div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900">PublishGo</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">API 直連後台，自動化上架與設定，徹底消除人為設定失誤與延遲。</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 font-bold">04</div>
-                    <h3 class="text-xl font-bold mb-3 text-blue-900">WatchGo</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">24/7 績效監控與自動預算熔斷機制，確保每一分預算都花在刀口上。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cases" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <div class="inline-block px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-bold mb-4">產業實績：室內裝修</div>
-                    <h2 class="text-3xl font-bold mb-6">突破獲客天花板：<br>精準獲取「百萬預算」屋主詢問</h2>
-                    <div class="space-y-4 text-slate-600">
-                        <div class="flex items-start gap-3">
-                            <div class="text-green-500 font-bold">✓</div>
-                            <p><strong>痛點解決：</strong> 透過「對號入座法」過濾無效詢問，專攻高預算精準屋主。</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="text-green-500 font-bold">✓</div>
-                            <p><strong>數據驗證：</strong> 獲得 100+ 則真實屋主訊息，每則詢問成本僅 NT$181。</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="text-green-500 font-bold">✓</div>
-                            <p><strong>規模化：</strong> 協助品牌突破效率瓶頸，CTR 提升達 67%。</p>
-                        </div>
-                    </div>
-                    <a href="https://line.me/ti/p/~0933050110" class="mt-8 inline-block px-6 py-3 border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition">索取完整規劃方案</a>
-                </div>
-                <div class="md:w-1/2 bg-slate-100 rounded-3xl p-8 border border-slate-200 shadow-inner">
-                    <div class="aspect-video bg-slate-200 rounded-xl flex items-center justify-center text-slate-400 italic">
-                        [ 數據圖表展示區：CPA -47% / CTR +67% ]
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8 text-blue-900">關於 OLS 創辦人</h2>
-            <p class="text-lg text-slate-700 leading-relaxed mb-6">
-                身為 Senior UA Manager，我深知傳統行銷的痛點。透過將<strong>專利自動化技術</strong>與<strong>全球 7 大市場的實戰經驗</strong>結合，我建立了 OLS 整合行銷，致力於為企業主提供「可預測、可擴展」的自動增長系統。
-            </p>
-            <div class="flex justify-center items-center gap-4 text-sm font-bold text-slate-500">
-                <span>Google Ads 認證</span>
-                <span>•</span>
-                <span>Meta Blueprint</span>
-                <span>•</span>
-                <span>AI Automation Expert</span>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-20 gradient-blue text-white text-center">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-4">準備好啟動你的自動化獲客機器了嗎？</h2>
-            <p class="text-blue-100 mb-10">立即加入 LINE 進行免費的獲客策略評估</p>
-            <a href="https://line.me/ti/p/~0933050110" class="px-10 py-5 bg-white text-blue-900 rounded-2xl font-bold text-xl hover:shadow-2xl transition inline-flex items-center gap-2">
-                與專家對談 (LINE)
+<!-- ══════ NAV ══════ -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">OLS <span>整合行銷</span></div>
+        <div class="nav-links">
+            <a href="#pain">裝修業痛點</a>
+            <a href="#formula">廣告公式</a>
+            <a href="#services">AI 系統</a>
+            <a href="#data">數據實績</a>
+            <!-- social icons -->
+            <a href="https://www.facebook.com/profile.php?id=61588269400777" target="_blank" class="nav-icon" title="Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <div class="mt-16 pt-8 border-t border-blue-400/30 text-blue-200 text-sm">
-                © 2026 OLS Integrated Marketing. All rights reserved.
+            <a href="https://www.instagram.com/prompt_and_ads/" target="_blank" class="nav-icon" title="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@prompt_and_ads" target="_blank" class="nav-icon" title="TikTok">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.79a4.84 4.84 0 0 1-1.01-.1z"/></svg>
+            </a>
+            <a href="https://line.me/ti/p/~0933050110" class="btn-nav">立即諮詢</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-stars"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <span class="tag-pill">OLS 整合行銷 · One Line Studio · 裝修業廣告增長專家</span>
+        <h1>讓你的作品<br><em>自動找到</em><br><strong>百萬預算屋主</strong></h1>
+        <p class="hero-sub">
+            <b>24 小時不間斷。</b>不靠人脈介紹、不再等電話響。<br>
+            OLS 獨家「訂單爆量廣告公式」+ AI 自動化投放框架，<br>
+            把好設計變成源源不絕的精準客源機器。
+        </p>
+        <div class="hero-ctas">
+            <a href="https://line.me/ti/p/~0933050110" class="btn-primary">免費獲客策略評估</a>
+            <a href="#pain" class="btn-ghost">看你現在的問題在哪</a>
+        </div>
+        <div class="social-row">
+            <a href="https://www.facebook.com/profile.php?id=61588269400777" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+            </a>
+            <a href="https://www.instagram.com/prompt_and_ads/" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                @prompt_and_ads
+            </a>
+            <a href="https://www.tiktok.com/@prompt_and_ads" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.79a4.84 4.84 0 0 1-1.01-.1z"/></svg>
+                @prompt_and_ads
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ STATS ══════ -->
+<section class="stats-bar">
+    <div class="stats-inner">
+        <div>
+            <span class="stat-val">-47%</span>
+            <div class="stat-lbl">CPA 降幅<br>$10.06 → $5.36</div>
+        </div>
+        <div>
+            <span class="stat-val">+141%</span>
+            <div class="stat-lbl">廣告購買量成長<br>4.33萬 → 10.46萬筆</div>
+        </div>
+        <div>
+            <span class="stat-val">NT$181</span>
+            <div class="stat-lbl">裝修業每則<br>屋主訊息成本</div>
+        </div>
+        <div>
+            <span class="stat-val">24hr</span>
+            <div class="stat-lbl">系統自動運作<br>老闆不卑微</div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════ PAIN POINTS ══════ -->
+<section id="pain" class="pain-section">
+    <div class="pain-inner">
+        <div style="text-align:center; margin-bottom:0;">
+            <span class="section-label">你的屋主，現在在哪裡？</span>
+            <h2 class="section-title" style="margin:0 auto; max-width:600px;">裝修業老闆的<br>三個真實痛點</h2>
+            <p class="section-sub" style="margin:12px auto 0;">好設計不等於好訂單。這三個問題，OLS 一次解決。</p>
+        </div>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-num">01</div>
+                <div class="pain-icon">🎨</div>
+                <div class="pain-title">優秀作品，沒人看見</div>
+                <p class="pain-desc">你花幾十萬、幾個月完成一個美案，發到 IG 只有 200 個讚，看的都是同行，不是屋主。</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-num">02</div>
+                <div class="pain-icon">📞</div>
+                <div class="pain-title">靠人脈介紹，不穩定</div>
+                <p class="pain-desc">好的月份接不完，淡季等得心慌。老闆不應該每天等電話響，業績不該靠運氣。</p>
+            </div>
+            <div class="pain-card">
+                <div class="pain-num">03</div>
+                <div class="pain-icon">💸</div>
+                <div class="pain-title">殺價屋主一堆，百萬客戶難找</div>
+                <p class="pain-desc">廣告錢燒了，來的都是問「可以再便宜嗎」的屋主，不是真客戶。廣告沒有精準過濾機制。</p>
             </div>
         </div>
-    </footer>
+        <div class="pain-cta-bar">
+            OLS 解決的正是這三個問題：讓你的好設計，<span>自動找到對的屋主</span>，還能幫老闆找回尊嚴。
+        </div>
+    </div>
+</section>
 
+<div class="divider"></div>
+
+<!-- ══════ FORMULA ══════ -->
+<section id="formula" class="formula-section">
+    <div class="formula-inner">
+        <div style="text-align:center;">
+            <span class="section-label">OLS 獨家</span>
+            <h2 class="section-title">訂單爆量廣告公式</h2>
+            <p class="section-sub" style="margin:12px auto 0;">
+                前三低成本廣告的 5 個共同基因。<strong style="color:var(--p4)">這不是巧合，是可複製的公式。</strong>
+            </p>
+        </div>
+        <div class="formula-grid">
+            <div class="formula-card">
+                <div class="formula-badge">CTR +67%</div>
+                <div class="formula-num">01</div>
+                <div class="formula-title">屋齡當 Hook</div>
+                <ul class="formula-bullets">
+                    <li>「50年公寓」「25年社區」精準標注</li>
+                    <li>讓老屋屋主立刻自動對號入座</li>
+                    <li>過濾掉新成屋不相關流量</li>
+                </ul>
+            </div>
+            <div class="formula-card">
+                <div class="formula-badge">點閱 +3倍</div>
+                <div class="formula-num">02</div>
+                <div class="formula-title">坪數具體化</div>
+                <ul class="formula-bullets">
+                    <li>「26坪」「29坪」「30坪」數字帶入</li>
+                    <li>屋主腦中自動對比自家大小</li>
+                    <li>「跟我差不多」瞬間認同感</li>
+                </ul>
+            </div>
+            <div class="formula-card">
+                <div class="formula-badge">CPR -40%</div>
+                <div class="formula-num">03</div>
+                <div class="formula-title">總價透明公開</div>
+                <ul class="formula-bullets">
+                    <li>「165萬」「230萬」明確標示</li>
+                    <li>99% 設計師不敢寫，你敢</li>
+                    <li>進來的客戶已接受預算，不再殺價</li>
+                </ul>
+            </div>
+            <div class="formula-card">
+                <div class="formula-badge">信任度 +5倍</div>
+                <div class="formula-num">04</div>
+                <div class="formula-title">真實客戶姓名</div>
+                <ul class="formula-bullets">
+                    <li>「黃小姐」「陳小姐」「李先生」</li>
+                    <li>不是廣告，是口碑推薦</li>
+                    <li>社會認同讓陌生人信任你</li>
+                </ul>
+            </div>
+            <div class="formula-card">
+                <div class="formula-badge">轉換率最高</div>
+                <div class="formula-num">05</div>
+                <div class="formula-title">完工結案格式</div>
+                <ul class="formula-bullets">
+                    <li>不是「我的服務有多好」</li>
+                    <li>而是「看，我完成了什麼」</li>
+                    <li>實績比廣告詞有力 10 倍</li>
+                </ul>
+            </div>
+            <!-- Formula example card -->
+            <div class="formula-card" style="background: linear-gradient(135deg, var(--p1) 0%, var(--b1) 100%); border-color:transparent;">
+                <div class="formula-badge" style="background:rgba(255,255,255,0.15); color:var(--gold-lt);">套用示範</div>
+                <div class="formula-num" style="color:var(--gold-lt);">→</div>
+                <div class="formula-title" style="color:#fff;">公式套用後的文案長這樣</div>
+                <div style="background:rgba(255,255,255,0.08); border-radius:10px; padding:14px; margin-top:8px;">
+                    <p style="color:var(--gold-lt); font-size:0.82rem; font-weight:700; line-height:1.7;">
+                        新成屋完工結案｜感謝林小姐信賴<br>
+                        28坪法式奶油風｜總價88萬<br>
+                        >> 私訊了解你家的裝修預算
+                    </p>
+                </div>
+                <p style="color:rgba(255,255,255,0.45); font-size:0.75rem; margin-top:10px;">同樣的素材，加入公式後廣告效益至少差 3 倍</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════ FUNNEL ══════ -->
+<section class="funnel-section">
+    <div class="funnel-inner">
+        <div style="text-align:center;">
+            <span class="section-label">24hr 自動獲客漏斗</span>
+            <h2 class="section-title">老闆不卑微，<br>系統幫你開發</h2>
+            <p class="section-sub" style="margin:12px auto 0;">從廣告投放到屋主主動傳訊息，全自動。你只需要接單。</p>
+        </div>
+        <div class="funnel-steps" style="margin-top:48px;">
+            <div class="funnel-step">
+                <div class="funnel-step-num">①</div>
+                <div class="funnel-step-content">
+                    <h4>投放廣告</h4>
+                    <p>精準觸及有裝修需求的百萬預算屋主，以瀏覽行為、房產數據與活動範圍交叉鎖定，廣告費只打給買得起的人。</p>
+                </div>
+            </div>
+            <div class="funnel-step-arrow">↓</div>
+            <div class="funnel-step">
+                <div class="funnel-step-num">②</div>
+                <div class="funnel-step-content">
+                    <h4>屋主看到廣告，自動對號入座</h4>
+                    <p>數據驗證文案勾起共鳴——看到坪數、屋齡、價格三個關鍵數字，屋主立刻對號，自然產生「這說的就是我」的認同感。</p>
+                </div>
+            </div>
+            <div class="funnel-step-arrow">↓</div>
+            <div class="funnel-step">
+                <div class="funnel-step-num">③</div>
+                <div class="funnel-step-content">
+                    <h4>屋主主動傳訊息</h4>
+                    <p>不用你打電話，不用你求轉介紹，屋主自己按下「傳送訊息」。因為廣告已預先過濾了預算，來的都是真客戶。</p>
+                </div>
+            </div>
+            <div class="funnel-step-arrow">↓</div>
+            <div class="funnel-step">
+                <div class="funnel-step-num">④</div>
+                <div class="funnel-step-content">
+                    <h4>你收到名單，開始接單</h4>
+                    <p>每天打開手機就有名單，不是問問哥，是有預算的真屋主。7 個詢問約 1 件成交（15% 成交率），真實獲客成本低於 NT$1,300/單。</p>
+                </div>
+            </div>
+            <div class="funnel-step-arrow">↓</div>
+            <div class="funnel-step">
+                <div class="funnel-step-num">⑤</div>
+                <div class="funnel-step-content">
+                    <h4>成交後出貼文，滾雪球累積</h4>
+                    <p>完工 → 套用公式出結案貼文 → 再投廣告。每一個案子都是下一個案子的燃料。口碑資產持續滾大。</p>
+                </div>
+            </div>
+        </div>
+        <div class="funnel-cta">
+            <h3>這個系統 24 小時不休息，你的手機每天都在響</h3>
+            <p>OLS 廣告增長服務 × AI 自動化框架，讓好設計被看見，讓老闆找回尊嚴</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════ SERVICES ══════ -->
+<section id="services" class="services-section">
+    <div class="services-inner">
+        <div style="text-align:center;">
+            <span class="section-label">AI 自動化框架</span>
+            <h2 class="section-title">Project One-Tap<br>24/7 全自動化引擎</h2>
+            <p class="section-sub" style="margin:12px auto 0;">廣告公式 × AI 自動執行，打破人工限制，建立不間斷的創意與投放循環</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-num-badge">01</div>
+                <div class="service-title">Slideshow Pro</div>
+                <p class="service-desc">AI 自動產製動態素材，將設計排期從天縮短至分鐘級。CPA 降低 17%，設計工時縮減 2.5 倍。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num-badge">02</div>
+                <div class="service-title">BriefGo</div>
+                <p class="service-desc">結構化需求轉譯系統，把「訂單爆量公式」自動嵌入每則廣告文案，確保策略 100% 精準執行。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num-badge">03</div>
+                <div class="service-title">PublishGo</div>
+                <p class="service-desc">API 直連廣告後台，自動化上架、受眾設定與排程投放，徹底消除人為失誤與延遲。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num-badge">04</div>
+                <div class="service-title">WatchGo</div>
+                <p class="service-desc">24/7 績效監控與自動預算熔斷機制，確保每一分預算都花在刀口上，數據全透明。</p>
+            </div>
+        </div>
+        <!-- USP row -->
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:24px;">
+            <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid rgba(109,40,217,0.1);">
+                <div style="font-size:1.5rem; margin-bottom:10px;">📊</div>
+                <div style="font-family:'Syne',sans-serif; font-weight:700; color:var(--p1); margin-bottom:6px;">數據完全透明</div>
+                <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">廣告跑在你自己的後台，每一塊錢流向完全透明，隨時可查。不綁定、不鎖死。</p>
+            </div>
+            <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid rgba(109,40,217,0.1);">
+                <div style="font-size:1.5rem; margin-bottom:10px;">🛡️</div>
+                <div style="font-family:'Syne',sans-serif; font-weight:700; color:var(--p1); margin-bottom:6px;">合約保證詢問數</div>
+                <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">白紙黑字保障成效，簽約後 5 天文案交稿，10 天廣告上線，兩周內真實屋主主動詢問。</p>
+            </div>
+            <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid rgba(109,40,217,0.1);">
+                <div style="font-size:1.5rem; margin-bottom:10px;">🎯</div>
+                <div style="font-family:'Syne',sans-serif; font-weight:700; color:var(--p1); margin-bottom:6px;">文案客製化</div>
+                <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">根據你的案例風格，撰寫「完工結案」格式文案，融入屋齡、坪數、總價等高效元素。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════ DATA / CHARTS ══════ -->
+<section id="data" class="data-section">
+    <div class="data-inner">
+        <div style="text-align:center; margin-bottom:48px;">
+            <span class="section-label">真實後台數據</span>
+            <h2 class="section-title">可量化的成長紀錄</h2>
+            <p class="section-sub" style="margin:12px auto 0;">三年連續優化，以實驗與效果指標驅動每一個決策</p>
+        </div>
+
+        <!-- CPA Trend -->
+        <div class="chart-card" style="margin-bottom:24px;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px;">
+                <div class="chart-header">
+                    <h3>FunNow 全球 CPA 三年優化趨勢</h3>
+                    <p>年度廣告預算 62 萬美元 · 跨 7 市場 · 連續三年達歷史最低</p>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <span class="badge badge-purple">CPA -47% YoY</span>
+                    <span class="badge badge-blue">預算下修 -10%</span>
+                    <span class="badge badge-green">效率提升 +40%</span>
+                </div>
+            </div>
+            <div style="height:280px; position:relative;">
+                <canvas id="cpaTrend"></canvas>
+            </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px;">
+            <!-- Purchase Volume -->
+            <div class="chart-card">
+                <div class="chart-header" style="margin-bottom:20px;">
+                    <h3>廣告購買量成長</h3>
+                    <p>從 4.33 萬筆擴增至 10.46 萬筆</p>
+                </div>
+                <div style="height:220px; position:relative;">
+                    <canvas id="purchaseVol"></canvas>
+                </div>
+            </div>
+            <!-- AI vs Manual -->
+            <div class="chart-card">
+                <div class="chart-header" style="margin-bottom:16px;">
+                    <h3>AI 素材 vs 人工素材</h3>
+                    <p>測試預算 $1,800 · AI 素材獲客效率提升 17%</p>
+                </div>
+                <div style="height:160px; position:relative;">
+                    <canvas id="aiVsManual"></canvas>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                    <div class="metric-box">
+                        <div class="metric-val green">$5.18</div>
+                        <div class="metric-lbl">AI 素材 CPA</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-val">$6.24</div>
+                        <div class="metric-lbl">人工素材 CPA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Renovation data table -->
+        <div class="chart-card">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px;">
+                <div class="chart-header">
+                    <h3>裝修業廣告實績 — Meta Ads Manager 真實後台數據</h3>
+                    <p>近 30 天 · 5 則廣告合計 100 則真實屋主訊息</p>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; min-width:340px;">
+                    <div class="metric-box">
+                        <div class="metric-val" style="font-size:1.6rem; color:var(--p4);">100</div>
+                        <div class="metric-lbl">真實屋主訊息</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-val gold" style="font-size:1.6rem;">NT$181</div>
+                        <div class="metric-lbl">平均每則成本</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-val green" style="font-size:1.6rem;">15%</div>
+                        <div class="metric-lbl">淡季成交率</div>
+                    </div>
+                </div>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>廣告案例</th>
+                            <th>每則訊息成本</th>
+                            <th>名單數</th>
+                            <th>總花費</th>
+                            <th>效率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>桃園區同德十街</td>
+                            <td><span class="tc-green">NT$132</span></td>
+                            <td>24</td>
+                            <td>NT$3,165</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>松山區撫遠街</td>
+                            <td><span class="tc-green">NT$166</span></td>
+                            <td>23</td>
+                            <td>NT$3,827</td>
+                            <td>★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>中和區景平路</td>
+                            <td><span class="tc-purple">NT$180</span></td>
+                            <td>37</td>
+                            <td>NT$6,676</td>
+                            <td>★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>中正區徐州路</td>
+                            <td>NT$208</td>
+                            <td>1</td>
+                            <td>NT$208</td>
+                            <td>★★★</td>
+                        </tr>
+                        <tr>
+                            <td>土城區莊圓街</td>
+                            <td>NT$270</td>
+                            <td>13</td>
+                            <td>NT$3,510</td>
+                            <td>★★</td>
+                        </tr>
+                        <tr style="font-weight:700; background:#fafaff;">
+                            <td>5 則廣告合計</td>
+                            <td><span class="tc-gold">NT$181 avg</span></td>
+                            <td><strong>100</strong></td>
+                            <td>NT$18,090</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:14px; font-size:0.8rem; color:var(--muted); padding:12px; background:var(--surface); border-radius:10px;">
+                📊 客戶分享淡季平均每 7 個詢問就有一件成交（15% 成交率），真實獲客成本壓低在 <strong>NT$1,300/單</strong>，不到淨利的 1%，是相當穩健的現金流投資。
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about" class="about-section">
+    <div class="about-inner">
+        <span class="tag-pill" style="margin-bottom:20px;">關於創辦人</span>
+        <h2 class="section-title" style="color:#fff;">OLS × Matt Chen</h2>
+        <p class="about-text">
+            身為 <b>Senior UA Manager（AI 驅動成長）</b>，在 FunNow Group 主導年度 62 萬美元廣告預算，跨台灣、香港、馬來西亞、泰國、日本、新加坡及菲律賓七大市場操盤。<br><br>
+            將<b>訂單爆量廣告公式</b>與<b>AI 自動化框架</b>結合，建立 OLS 整合行銷，致力於幫裝修業老闆建立「可預測、可擴展」的 24 小時客源系統。
+        </p>
+        <div class="cert-tags">
+            <span class="cert-tag">Meta Blueprint 認證</span>
+            <span class="cert-tag">Google Ads 認證</span>
+            <span class="cert-tag">AI Automation Expert</span>
+            <span class="cert-tag">7 大市場實戰經驗</span>
+            <span class="cert-tag">n8n / LLM Workflow</span>
+        </div>
+        <div class="social-row" style="justify-content:center; margin-top:28px;">
+            <a href="https://www.facebook.com/profile.php?id=61588269400777" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+            </a>
+            <a href="https://www.instagram.com/prompt_and_ads/" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
+            </a>
+            <a href="https://www.tiktok.com/@prompt_and_ads" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.79a4.84 4.84 0 0 1-1.01-.1z"/></svg>
+                TikTok
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-cta">
+            <h2>準備好讓屋主<em>主動找上門</em>了嗎？</h2>
+            <p>立即加入 LINE，進行免費獲客策略評估 — 兩周內真實屋主主動詢問</p>
+            <a href="https://line.me/ti/p/~0933050110" class="btn-footer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+                與 Matt 直接對談 (LINE)
+            </a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 OLS 整合行銷 · One Line Studio · Matt Chen. All rights reserved.</p>
+            <div class="footer-icons">
+                <a href="https://www.facebook.com/profile.php?id=61588269400777" target="_blank" class="footer-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/prompt_and_ads/" target="_blank" class="footer-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@prompt_and_ads" target="_blank" class="footer-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.79a4.84 4.84 0 0 1-1.01-.1z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+const purple = '#6d28d9', blue = '#2563eb', purpleLight = '#a855f7', gold = '#c9a84c';
+
+// CPA Trend
+new Chart(document.getElementById('cpaTrend').getContext('2d'), {
+    type:'line',
+    data:{
+        labels:['2023 Q1','Q2','Q3','Q4','2024 Q1','Q2','Q3','Q4','2025 Q1','Q2'],
+        datasets:[{
+            label:'CPA (USD)',
+            data:[10.06,10.2,9.8,9.4,8.85,8.2,7.95,7.1,5.8,5.36],
+            borderColor: purpleLight,
+            backgroundColor:'rgba(168,85,247,0.08)',
+            borderWidth:3, pointBackgroundColor: purpleLight,
+            pointRadius:5, tension:0.4, fill:true
+        }]
+    },
+    options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>' CPA: $'+c.parsed.y.toFixed(2)}} },
+        scales:{
+            y:{ beginAtZero:false, min:4, max:11, ticks:{callback:v=>'$'+v}, grid:{color:'rgba(0,0,0,0.04)'} },
+            x:{ grid:{display:false} }
+        }
+    }
+});
+
+// Purchase Volume
+new Chart(document.getElementById('purchaseVol').getContext('2d'), {
+    type:'bar',
+    data:{
+        labels:['2023','2024','2025'],
+        datasets:[{
+            label:'廣告購買量（萬筆）',
+            data:[4.33,5.38,10.46],
+            backgroundColor:['rgba(109,40,217,0.25)','rgba(109,40,217,0.6)','rgba(109,40,217,1)'],
+            borderRadius:10, borderSkipped:false
+        }]
+    },
+    options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>' '+c.parsed.y+' 萬筆'}} },
+        scales:{ y:{beginAtZero:true, ticks:{callback:v=>v+'萬'}, grid:{color:'rgba(0,0,0,0.04)'}}, x:{grid:{display:false}} }
+    }
+});
+
+// AI vs Manual
+new Chart(document.getElementById('aiVsManual').getContext('2d'), {
+    type:'bar',
+    data:{
+        labels:['AI 素材','人工素材'],
+        datasets:[
+            { label:'CTR %', data:[1.00,1.02], backgroundColor:['rgba(109,40,217,0.7)','rgba(148,163,184,0.45)'], borderRadius:8, yAxisID:'y' },
+            { label:'CVR %', data:[5.09,3.90], backgroundColor:['rgba(109,40,217,1)','rgba(100,116,139,0.5)'], borderRadius:8, yAxisID:'y' }
+        ]
+    },
+    options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{position:'top', labels:{font:{size:11}}}, tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+c.parsed.y+'%'}} },
+        scales:{ y:{beginAtZero:true, ticks:{callback:v=>v+'%'}, grid:{color:'rgba(0,0,0,0.04)'}}, x:{grid:{display:false}} }
+    }
+});
+</script>
 </body>
 </html>
